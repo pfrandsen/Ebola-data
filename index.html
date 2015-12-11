@@ -1,1 +1,149 @@
 
+<!doctype html>
+<html lang="en" ng-app="ebolaDataApp">
+<head>
+  <meta charset="utf-8">
+  <title>Ebola data, 2014 West Africa Ebola outbreak</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script>
+
+var ebolaDataApp = angular.module('ebolaDataApp', []);
+
+ebolaDataApp.controller('EbolaDataCtrl', function($scope) {
+
+  $scope.getMonth = function (val) {
+    switch (val) {
+      case '01': return 'January';
+      case '02': return 'February';
+      case '03': return 'March';
+      case '04': return 'April';
+      case '05': return 'May';
+      case '06': return 'June';
+      case '07': return 'July';
+      case '08': return 'August';
+      case '09': return 'September';
+      case '10': return 'October';
+      case '11': return 'November';
+      case '12': return 'December';
+    }
+    return 'Unknown';
+  };
+
+  $scope.country = {
+    name: 'SLE'
+  };
+
+  $scope.newTab = true; // true -> open link in new tab
+
+  $scope.data = [
+    {'year': '2015', 'months': [
+        {'month': '11', 'dates': ['20', '19', '18', '17', '16', '13', '12', '11', '10', '09', '06', '05', '04', '03', '02']}, 
+        {'month': '10', 'dates': ['30', '29', '28', '27', '26', '23', '22', '21', '20', '19', '16', '15', '14', '13', '12', '09', '08', '07', '06', '05', '02', '01']},
+        {'month': '09', 'dates': ['30', '29', '28', '25', '24', '23', '22', '21', '18', '17', '16', '15', '14', '11', '10', '09', '08', '07', '04', '03', '02', '01']},
+        {'month': '08', 'dates': ['31', '28', '27', '26', '25', '24', '21', '20', '19', '18', '17', '14', '13', '12', '11', '10', '07', '06', '05', '04', '03']},
+        {'month': '07', 'dates': ['31', '30', '29', '28', '27', '24', '23', '22', '21', '20', '17', '16', '15', '14', '13', '10', '09', '08', '07', '06', '03', '02', '01']},
+        {'month': '06', 'dates': ['30', '29', '26', '25', '24', '23', '22', '19', '18', '17', '16', '15', '12', '11', '10', '09', '08', '05', '04', '03', '02', '01']},
+        {'month': '06', 'dates': ['29', '28', '27', '26', '25', '22', '21', '20', '19', '18', '15', '14', '13', '12', '11', '08', '07', '06', '05', '04', '01']},
+        {'month': '04', 'dates': ['30', '29', '28', '27', '24', '23', '22', '21', '20', '17', '16', '15', '14', '13', '10', '09', '08', '07', '02', '01']},
+        {'month': '03', 'dates': ['31', '30', '27', '26', '25', '24', '23', '20', '19', '18', '17', '16', '13', '12', '11', '10', '09', '06', '05', '04', '02']},
+        {'month': '02', 'dates': ['27', '26', '25', '23', '20', '19', '18', '17', '16', '13', '12', '11', '10', '09', '06', '05', '04', '03', '02']},
+        {'month': '01', 'dates': ['30', '29', '28', '27', '26', '23', '22', '21', '20', '19', '16', '15', '14', '13', '12', '09', '08', '07', '06', '05', '02']}
+      ]
+    },
+    {'year': '2014', 'months': [
+        {'month': '12', 'dates': ['31', '30', '29', '26', '24', '23', '22', '19', '17', '15', '12', '11', '10', '08', '05', '04', '03', '02', '01']}, 
+        {'month': '11', 'dates': ['28', '26', '21', '19', '14']} 
+      ]
+    }
+  ];
+
+  $scope.dataSets = ['2015-11-20', '2015-11-19'];
+});
+</script>
+</head>
+<body ng-controller="EbolaDataCtrl">
+<h1>2014 West Africa Ebola outbreak</h1>
+
+  <div>The data sets links in this page are generated from the links in <a href"http://apps.who.int/gho/data/node.ebola-sitrep.ebola-summary?lang=en">Ebola data and statistics - Situation summary</a> (WHO page).
+  </div>The aggrgate data link is a link to data summarized per week (new cases, deaths not included). This link contains data for a longer time frame then are covered by the situation summary links.
+  <div>
+  </div>
+
+  <h2>Select country</h2>
+  <form name="placeholderForm">
+    <label>
+      <input type="radio" ng-model="country.name" value="SLE">
+      Sierra Leone (SLE)
+    </label>
+    <label>
+      <input type="radio" ng-model="country.name" value="LBR">
+      Liberia (LBR)
+    </label>
+    <label>
+      <input type="radio" ng-model="country.name" value="GIN">
+      Guinea (GIN)
+    </label>
+    <label>
+      <input type="radio" ng-model="country.name" value="UNSPECIFIED">
+      Total (UNSPECIFIED)
+    </label>
+
+   <br/>
+    <label>
+      <input type="checkbox" ng-model="newTab">
+      Open data view in new tab
+    </label>
+  </form>
+
+  <h2>Agregate data (latest)</h2>
+  <div>Data summarized per week (new cases, deaths not included)</div>
+  <div><a target="{{newTab ? '_blank' : ''}}" href="http://apps.who.int/gho/data/node.ebola-sitrep.ebola-country-{{country.name}}-latest?lang=en">Latest</a></div>
+
+  <h3>CDC (Centers for Disease Control and Prevention) data aggregation</h3>
+  <div>CDC has aggregated data from WHO and made it available in readily useable formats. The data can be found here: <a href="http://www.cdc.gov/vhf/ebola/outbreaks/2014-west-africa/cumulative-cases-graphs.html">Cumulative cases graphs</a>. Links to data files:
+
+
+   <ul>
+     <li><a href="http://www.cdc.gov/vhf/ebola/csv/graph1-cumulative-reported-cases-all.xlsx">Reported suspected, probable, and confirmed cases in Guinea, Liberia, and Sierra Leone (March 25, 2014 – November 15, 2015)</a></li>
+     <li><a href="http://www.cdc.gov/vhf/ebola/csv/graph2-cumulative-reported-cases-guinea.xlsx">Total suspected, probable, and confirmed cases and deaths in Guinea (March 25, 2014 – November 15, 2015)</a></li>
+     <li><a href="http://www.cdc.gov/vhf/ebola/csv/graph3-cumulative-reported-cases-liberia.xlsx">Total suspected, probable, and confirmed cases and deaths in Liberia (March 25, 2014 – November 15, 2015)</a></li>
+     <li><a href="http://www.cdc.gov/vhf/ebola/csv/graph4-cumulative-reported-cases-sierra-leone.xlsx">Total suspected, probable, and confirmed cases and deaths in Sierra Leone (March 25, 2014 – November 15, 2015)</a></li>
+   </ul>
+
+
+  </div>
+
+
+  <h2>Data sets by date</h2>
+
+  <div ng-repeat="y in data">
+    <h3>{{y.year}}</h3>
+    <div ng-repeat="m in y.months">
+      <h4>{{getMonth(m.month)}} ({{y.year}}-{{m.month}})</h4>
+      <ul>
+        <li ng-repeat="v in m.dates">
+        Dataset: <a target="{{newTab ? '_blank' : ''}}"
+        href="http://apps.who.int/gho/athena/xmart/EBOLA_MEASURE/CASES,DEATHS?format=html&profile=filter&x-format=html&x-profile=xtab&x-sideaxis=COUNTRY;EPI_DATE;CASE_DEFINITION&x-topaxis=EBOLA_MEASURE;INDICATOR_TYPE&filter=COUNTRY:{{country.name}};LOCATION:-;DATAPACKAGEID:{{y.year}}-{{m.month}}-{{v}};INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-#">{{y.year}}-{{m.month}}-{{v}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+<!--
+  <ul>
+    <li ng-repeat="dataSet in dataSets">
+      <a href="http://apps.who.int/gho/athena/xmart/EBOLA_MEASURE/CASES,DEATHS?format=html&profile=filter&x-format=html&x-profile=xtab&x-sideaxis=COUNTRY;EPI_DATE;CASE_DEFINITION&x-topaxis=EBOLA_MEASURE;INDICATOR_TYPE&filter=COUNTRY:SLE;COUNTRY:UNSPECIFIED;LOCATION:-;DATAPACKAGEID:{{dataSet}};INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-#">{{dataSet}}</a>
+    </li>
+  </ul>
+
+  <ul>
+    <li ng-repeat="dataSet in dataSets">
+      <a target="{{newTab ? '_blank' : ''}}" href="http://apps.who.int/gho/athena/xmart/EBOLA_MEASURE/CASES,DEATHS?format=html&profile=filter&x-format=html&x-profile=xtab&x-sideaxis=COUNTRY;EPI_DATE;CASE_DEFINITION&x-topaxis=EBOLA_MEASURE;INDICATOR_TYPE&filter=COUNTRY:{{country.name}};LOCATION:-;DATAPACKAGEID:{{dataSet}};INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-#">{{dataSet}}</a>
+    </li>
+  </ul>
+-->
+
+</body>
+</html>
